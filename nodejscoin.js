@@ -12,6 +12,11 @@ class Block {
     this.hash = this.generateHash()
   }
 
+  /**
+   * The function takes the index, timestamp, previous hash, and data of the block and returns a SHA256
+   * hash of all of these values
+   * @returns The SHA256 hash of the index, timestamp, previous hash, and data.
+   */
   generateHash() {
     return SHA256(this.index + this.timeStamp + this.previousHash + JSON.stringify(this.data).toString())
   }
@@ -23,6 +28,12 @@ class Blockchain {
     this.blockchain = [this.createGenesisBlock()]
   }
 
+  /**
+   * It creates a new block with index 0, a timestamp of 13/05/2022, a data of 'first Block on the
+   * Chain' and a previous hash of 0
+   * @returns A new block with the index of 0, the timestamp of 13/05/2022, the data of 'first Block on
+   * the Chain' and the previous hash of 0.
+   */
   createGenesisBlock() {
     return new Block(0, '13/05/2022', 'first Block on the Chain', '0')
   }
@@ -31,6 +42,10 @@ class Blockchain {
     return this.blockchain[this.blockchain.length - 1]
   }
 
+  /**
+   * It adds a new block to the blockchain
+   * @param newBlock - The new block that will be added to the blockchain.
+   */
   addNewBlock(newBlock) {
     newBlock.previousHash = this.getLatestBlock().hash
     newBlock.hash = newBlock.computeHash()
